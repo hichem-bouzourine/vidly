@@ -4,7 +4,7 @@ import _ from "lodash";
 
 class TableBody extends Component {
   render() {
-    const { data, columns, onLike, onDelete } = this.props;
+    const { data, columns, onLike, onDelete, onModify } = this.props;
     return (
       <tbody>
         {data.map((item) => (
@@ -16,6 +16,14 @@ class TableBody extends Component {
             ))}
             <td>
               <Like liked={item.liked} onClick={() => onLike(item)} />
+            </td>
+            <td>
+              <button
+                onClick={() => onModify(item._id)}
+                className="btn btn-warning btn-sm"
+              >
+                Modify
+              </button>
             </td>
             <td>
               <button

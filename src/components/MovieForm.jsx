@@ -1,8 +1,8 @@
 import React from "react";
 import Form from "./common/form";
 import Joi from "joi-browser";
-import { getMovie, saveMovie } from "../services/fakeMovieService";
-import { getGenres } from "../services/fakeGenreService";
+import { getMovie, saveMovie } from "../services/movieService";
+import { getGenres } from "../services/genreService";
 import { Navigate } from "react-router-dom";
 
 class MovieForm extends Form {
@@ -25,16 +25,16 @@ class MovieForm extends Form {
     dailyRentalRate: Joi.number().greater(0).less(10).required(),
   };
 
-  componentDidMount() {
-    const genres = getGenres();
+  async componentDidMount() {
+    const { data: genres } = await getGenres();
     this.setState({ genres });
+
     const { id: movieId } = this.props;
     if (movieId === "new") return;
 
-    const movie = getMovie(movieId);
+    const movie = await getMovie(movieId);
     if (!movie) return <Navigate to="../not-found" replace={true} />;
-
-    this.setState({ data: this.mapToVieModel(movie) });
+    this.setState({ data: this.mapToViewModel(movie) });
   }
 
   mapToViewModel(movie) {
@@ -47,10 +47,10 @@ class MovieForm extends Form {
     };
   }
 
-  doSubmit = () => {
-    saveMovie(this.state.data);
+  doSubmit = async () => {
+    await saveMovie(this.state.data);
 
-    Navigate("/movies", { replace: false });
+    this.props.navigate("/", { replace: true });
   };
 
   render() {
@@ -61,7 +61,7 @@ class MovieForm extends Form {
           {this.renderInput("title", "Title")}
           {this.renderSelect("genreId", "Genre", this.state.genres)}
           {this.renderInput("numberInStock", "Number In Stock")}
-          {this.renderInput("rate", "Rate")}
+          {this.renderInput("dailyRentalRate", "Rate")}
           {this.renderButton("Save")}
         </form>
       </div>

@@ -16,6 +16,10 @@ code {
   margin-bottom: 15px;
 }
 
+.btn {
+  margin-top: 15px;
+}
+
 .clickable {
   cursor: pointer;
 }
