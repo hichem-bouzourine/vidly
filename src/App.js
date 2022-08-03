@@ -39,7 +39,7 @@ function App() {
           </Route>
           <Route path="customers" element={<Customers />} />
           <Route path="rentals" element={<Rentals />} />
-          <Route path="login" element={<LoginForm />} />
+          <Route path="login" element={<LoginForm navigate={navigate} />} />
           <Route
             path="register"
             element={<RegisterForm navigate={navigate} />}
