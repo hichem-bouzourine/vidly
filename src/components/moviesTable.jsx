@@ -10,8 +10,9 @@ class MoviesTable extends Component {
     { key: "like" },
     { key: "delete" },
   ];
+
   render() {
-    const { movies, onModify, onDelete, onLike, onSort, sortColumn } =
+    const { movies, onModify, onDelete, onLike, onSort, sortColumn, user } =
       this.props;
 
     return (
@@ -21,6 +22,7 @@ class MoviesTable extends Component {
         sortColumn={sortColumn}
         onSort={onSort}
         onLike={onLike}
+        user={user}
         onModify={onModify}
         onDelete={onDelete}
       />

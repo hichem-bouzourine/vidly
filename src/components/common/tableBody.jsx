@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Like from "../common/like";
 import _ from "lodash";
+// import { getCurrentUser } from "../../services/httpService";
 
 class TableBody extends Component {
   render() {
-    const { data, columns, onLike, onDelete, onModify } = this.props;
+    const { data, columns, onLike, onDelete, onModify, user } = this.props;
     return (
       <tbody>
         {data.map((item) => (
@@ -18,20 +19,24 @@ class TableBody extends Component {
               <Like liked={item.liked} onClick={() => onLike(item)} />
             </td>
             <td>
-              <button
-                onClick={() => onModify(item._id)}
-                className="btn btn-warning btn-sm"
-              >
-                Modify
-              </button>
+              {user && (
+                <button
+                  onClick={() => onModify(item._id)}
+                  className="btn btn-warning btn-sm"
+                >
+                  Modify
+                </button>
+              )}
             </td>
             <td>
-              <button
-                onClick={() => onDelete(item)}
-                className="btn btn-danger btn-sm"
-              >
-                Delete
-              </button>
+              {user && user.isAdmin && (
+                <button
+                  onClick={() => onDelete(item)}
+                  className="btn btn-danger btn-sm"
+                >
+                  Delete
+                </button>
+              )}
             </td>
           </tr>
         ))}

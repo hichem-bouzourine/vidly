@@ -3,8 +3,16 @@ import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 
 const Table = (props) => {
-  const { columns, sortColumn, onSort, data, onLike, onDelete, onModify } =
-    props;
+  const {
+    columns,
+    sortColumn,
+    onSort,
+    data,
+    onLike,
+    onDelete,
+    onModify,
+    user,
+  } = props;
 
   return (
     <table className="table">
@@ -13,6 +21,7 @@ const Table = (props) => {
         columns={columns}
         data={data}
         onLike={onLike}
+        user={user}
         onModify={onModify}
         onDelete={onDelete}
       />
