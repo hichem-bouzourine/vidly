@@ -1,6 +1,6 @@
 import http from "./httpService";
 
-const apiEndPoint = "/auth";
+const apiEndPoint = "/api/auth";
 
 http.setJwt(getJwt());
 

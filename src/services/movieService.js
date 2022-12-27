@@ -1,7 +1,7 @@
 import http from "./httpService";
 import config from "../config.json";
 
-const apiEndPoint = "/movies";
+const apiEndPoint = "/api/movies";
 export function getMovies() {
   return http.get(apiEndPoint);
 }
